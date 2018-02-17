@@ -5,7 +5,7 @@ var client = new Twitter(keys.twitter);
 var input = process.argv[2];
 var input2 = process.argv[3];
 
-switch(input){
+switch (input) {
   case 'my-tweets':
     pullTweats();
     break;
@@ -24,21 +24,30 @@ switch(input){
 
 };
 
-function pullTweats () {
+function pullTweats() {
+  var params = {screen_name: 'Offical_Roboto'};
+  //https://developer.twitter.com/en/docs/tweets/curate-a-collection/api-reference/get-collections-list
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    if (!error) {
+      console.log(tweets);
+    }
+  });
   //twitter API
-  
+
+  //loop though jason and print tweets
+
 
 }
 
-function Spotify (song) {
+function Spotify(song) {
   //get song
 
 }
 
-function movie (movieName) {
+function movie(movieName) {
   // Code Goes Here...
 }
 
-function doit () {
+function doit() {
   //take text from text.txt and do something with it.
 }
