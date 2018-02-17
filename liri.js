@@ -7,6 +7,7 @@ var client = new Twitter(keys.twitter);
 
 var input = process.argv[2];
 var input2 = process.argv[3];
+console.log(input);
 
 switch (input) {
   case 'my-tweets':
@@ -28,9 +29,15 @@ switch (input) {
 };
 
 function pullTweats() {
-  var params = {screen_name: 'Offical_Roboto'};
+  console.log('Pulling tweets');
+
+  var params = {
+    screen_name: 'Offical_Roboto'
+  };
   //https://developer.twitter.com/en/docs/tweets/curate-a-collection/api-reference/get-collections-list
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    console.log('requested');
+    console.log(tweets);
     if (!error) {
       console.log(tweets);
     }
