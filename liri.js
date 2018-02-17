@@ -7,7 +7,6 @@ var client = new Twitter(keys.twitter);
 
 var input = process.argv[2];
 var input2 = process.argv[3];
-console.log(input);
 
 switch (input) {
   case 'my-tweets':
@@ -36,10 +35,15 @@ function pullTweats() {
   };
   //https://developer.twitter.com/en/docs/tweets/curate-a-collection/api-reference/get-collections-list
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    console.log('requested');
-    console.log(tweets);
+
     if (!error) {
-      console.log(tweets);
+      // console.log(tweets);
+      for (var i = 0; i < tweets.length; i++) {
+        console.log(tweets[i].text);
+      }
+
+    } else {
+      console.log(error);
     }
   });
   //twitter API
