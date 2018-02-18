@@ -55,14 +55,25 @@ function spotifyThisSong(song) {
   console.log(`Pulling: '${song}'`);
   // console.log(spotify);
 
-  spotify.search({ type: 'track', query: song }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
+  spotify.search({
+    type: 'track',
+    query: song
+  }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
 
-console.log(data.tracks.items[1].album);
+    var artist = data.tracks.items[1].artists[1].name;
+    var songNameFromSpotify = data.tracks.items[1].name;
+    var songUrl = data.tracks.items[1].preview_url;
+    var album = data.tracks.items[1].album.name;
 
-});
+    // console.log(data.tracks.items[1].artists);
+
+    console.log(` Artist: ${artist} \n Song: ${songNameFromSpotify} \n Preview URL: ${songUrl} \n Album: ${album}`);
+
+    // console.log(songNameFromSpotify);
+  });
 
 
 }
