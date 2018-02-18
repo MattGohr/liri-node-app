@@ -1,9 +1,18 @@
 require("dotenv").config();
 var Twitter = require('twitter');
 var keys = require('./keys.js')
-
-var spotify = new Spotify(keys.spotify);
+// var Spotify = require('node-spotify-api');
+//
+// var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
+
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+  id: 'fbfdbe7819f24807b0b0ae5d63a5745a',
+  secret: '3a6dea8cff9b4a2ea5111c32998231ac'
+});
+
 
 var input = process.argv[2];
 var input2 = process.argv[3];
@@ -37,7 +46,7 @@ function pullTweats() {
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
     if (!error) {
-      // console.log(tweets);
+
       for (var i = 0; i < tweets.length; i++) {
         console.log(`\n${tweets[i].created_at}\n ${tweets[i].text}`);
       }
@@ -46,15 +55,13 @@ function pullTweats() {
       console.log(error);
     }
   });
-  //twitter API
 
-  //loop though jason and print tweets
-
-//sdfn
 }
 
 function Spotify(song) {
   //get song
+  console.log(`Pulling: '${song}'`);
+  // console.log(spotify);
 
 }
 
