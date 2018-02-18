@@ -1,18 +1,10 @@
 require("dotenv").config();
 var Twitter = require('twitter');
 var keys = require('./keys.js')
-// var Spotify = require('node-spotify-api');
-//
-// var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
-
 var Spotify = require('node-spotify-api');
 
-var spotify = new Spotify({
-  id: 'fbfdbe7819f24807b0b0ae5d63a5745a',
-  secret: '3a6dea8cff9b4a2ea5111c32998231ac'
-});
-
+var spotify = new Spotify(keys.spotify);
+var client = new Twitter(keys.twitter);
 
 var input = process.argv[2];
 var input2 = process.argv[3];
@@ -23,7 +15,7 @@ switch (input) {
     break;
 
   case 'spotify-this-song':
-    Spotify(input2);
+    spotifyThisSong(input2);
     break;
 
   case 'movie-this':
@@ -58,10 +50,20 @@ function pullTweats() {
 
 }
 
-function Spotify(song) {
+function spotifyThisSong(song) {
   //get song
   console.log(`Pulling: '${song}'`);
   // console.log(spotify);
+
+  spotify.search({ type: 'track', query: song }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+
+console.log(data.tracks.items[1].album);
+
+});
+
 
 }
 
