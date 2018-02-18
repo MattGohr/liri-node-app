@@ -39,7 +39,7 @@ function pullTweats() {
     if (!error) {
       // console.log(tweets);
       for (var i = 0; i < tweets.length; i++) {
-        console.log(tweets[i].text);
+        console.log(`\n${tweets[i].created_at}\n ${tweets[i].text}`);
       }
 
     } else {
