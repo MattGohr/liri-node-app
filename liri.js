@@ -85,21 +85,15 @@ function movie(movieName) {
   console.log(movie2);
   request(`http://www.omdbapi.com/?t=${movie2}&y=&plot=short&apikey=trilogy`, function(error, response, body) {
 
-    // If the request is successful (i.e. if the response status code is 200)
-    if (!error && response.statusCode === 200) {
-
-      var Title =body.Title
-      var Year =body.Year
-      var Rating = body.imdbRating
-      // var RottenTomatoesRating = body.Ratings[1].Value
-      var Country = body.Country
-      var Language = body.Language
-      var Plot = body.Plot
-      var Actors = body.Actors
-      console.log(JSON.parse(body));
-      console.log((body.Ratings));
-      // console.log(` Title: ${Title} \n Year: ${Year} \n IMDB Rating: ${Rating} \n Rotten Tomatoes Rating: ${RottenTomatoesRating}`);
-    }
+      // If the request is successful (i.e. if the response status code is 200)
+      if (!error && response.statusCode === 200)
+        var parsed = JSON.parse(body);
+        var { Title, imdbRating, Year, Country, Language, Plot, Actors } = parsed;
+        var RottenTomatoesRating = parsed.Ratings[1].Value;
+        // 
+        // console.log(parsed);
+        // console.log(RottenTomatoesRating);
+        console.log(` Title: ${Title} \n Year: ${Year} \n IMDB Rating: ${imdbRating} \n Rotten Tomatoes Rating: ${RottenTomatoesRating} \n Year: ${Year} \n Country: ${Country} \n Language: ${Language} \n Plot: ${Plot}`);
   });
 }
 
