@@ -3,6 +3,7 @@ var Twitter = require('twitter');
 var keys = require('./keys.js')
 var Spotify = require('node-spotify-api');
 var request = require("request");
+var fs = require("fs");
 
 
 var spotify = new Spotify(keys.spotify);
@@ -11,24 +12,27 @@ var client = new Twitter(keys.twitter);
 var input = process.argv[2];
 var input2 = process.argv[3];
 
-switch (input) {
-  case 'my-tweets':
-    pullTweats();
-    break;
+function  logic(query){
+  switch (query) {
+    case 'my-tweets':
+      pullTweats();
+      break;
 
-  case 'spotify-this-song':
-    spotifyThisSong(input2);
-    break;
+    case 'spotify-this-song':
+      spotifyThisSong(input2);
+      break;
 
-  case 'movie-this':
-    movie(input2);
-    break;
+    case 'movie-this':
+      movie(input2);
+      break;
 
-  case 'do-what-it-says':
-    doit();
-    // break;
+    case 'do-what-it-says':
+      fromFile();
+      break;
 
-};
+  };
+}
+
 
 function pullTweats() {
   console.log('Pulling tweets');
@@ -90,13 +94,38 @@ function movie(movieName) {
         var parsed = JSON.parse(body);
         var { Title, imdbRating, Year, Country, Language, Plot, Actors } = parsed;
         var RottenTomatoesRating = parsed.Ratings[1].Value;
-        // 
+        //
         // console.log(parsed);
         // console.log(RottenTomatoesRating);
         console.log(` Title: ${Title} \n Year: ${Year} \n IMDB Rating: ${imdbRating} \n Rotten Tomatoes Rating: ${RottenTomatoesRating} \n Year: ${Year} \n Country: ${Country} \n Language: ${Language} \n Plot: ${Plot}`);
   });
 }
 
-function doit() {
-  //take text from text.txt and do something with it.
+function fromFile() {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+      return console.log(error);
+    }
+
+    // We will then print the contents of data
+    console.log(data);
+
+    // Then split it by commas (to make it more readable)
+    var dataArr = data.split(",");
+
+    // We will then re-display the content as an array for later use.
+    console.log('calling first from file: ' + dataArr[0]);
+
+    //renaming input2
+    input2 = dataArr[1].trim();
+    console.log(input2);
+
+    logic(dataArr[0]);
+
+  });
+
+
 }
+logic(input)
