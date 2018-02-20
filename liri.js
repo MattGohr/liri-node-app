@@ -69,10 +69,10 @@ function spotifyThisSong(song) {
       return console.log('Error occurred: ' + err);
     }
 
-    var artist = data.tracks.items[1].artists[1].name;
-    var songNameFromSpotify = data.tracks.items[1].name;
-    var songUrl = data.tracks.items[1].preview_url;
-    var album = data.tracks.items[1].album.name;
+    var artist = data.tracks.items[0].artists[0].name;
+    var songNameFromSpotify = data.tracks.items[0].name;
+    var songUrl = data.tracks.items[0].preview_url;
+    var album = data.tracks.items[0].album.name;
 
     // console.log(data.tracks.items[1].artists);
 
